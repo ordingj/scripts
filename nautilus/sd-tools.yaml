@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sd-tools
+spec:
+  restartPolicy: Never
+  containers:
+    - name: tools
+      image: ubuntu:22.04
+      command: ["sleep", "infinity"]
+      volumeMounts:
+        - mountPath: /models
+          name: models
+  volumes:
+    - name: models
+      persistentVolumeClaim:
+        claimName: sd-stable-diffusion-model-store-sd-stable-diffusion-0

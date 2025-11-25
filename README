@@ -1,0 +1,9 @@
+## Nautilus — personal research, tools, and deployment artifacts
+
+This workspace contains the "Nautilus" collection of notes, utilities, and small projects used
+for experimentation with networking, automation, and machine-learning model tooling. Content in
+`nautilus/` includes research notes, configuration files, lightweight scripts, and examples for
+running experiments or deploying models (kubernetes manifests, Docker artifacts, and helper
+scripts).
+
+- `nautilus/`: research notes, tutorials, and experiment artifacts.

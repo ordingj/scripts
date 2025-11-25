@@ -1,0 +1,42 @@
+# values.yaml — stable-diffusion-k8s on NRP Nautilus
+replicaCount: 1
+
+image:
+  repository: amithkk/stable-diffusion
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+# Default flags support ~6 GB GPUs; adjust per your needs.
+# See README for feature notes (Textual Inversion, green images, etc.).
+cliFlags: "--extra-models-cpu --optimized-turbo"
+
+resources:
+  limits:
+    nvidia.com/gpu: 1
+    cpu: "4"
+    memory: "16Gi"
+  requests:
+    nvidia.com/gpu: 1
+    cpu: "2"
+    memory: "8Gi"
+
+service:
+  type: ClusterIP
+  port: 7860
+
+persistence:
+  enabled: true
+  # RBD (RWO) is a good default; switch to a CephFS class (RWX) for multi-pod sharing.
+  storageClass: rook-ceph-block
+  accessModes: ["ReadWriteOnce"]
+  size: 50Gi
+
+ingress:
+  enabled: true
+  ingressClassName: haproxy
+  hosts:
+    - host: ordingj
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: [] # TLS is handled automatically for *.nrp-nautilus.io
