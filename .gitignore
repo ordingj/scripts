@@ -12,5 +12,5 @@ __pycache__/
 Makefile
 scripts.code-workspace
 pyproject.toml
-ece565/*
+ece565/
 nautilus/config
